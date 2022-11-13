@@ -43,7 +43,7 @@ def handle_message(event):
                         CarouselColumn(
                             thumbnail_image_url = 'https://i.imgur.com/Ex3Opfo.png',
                             title = '{} ~ {}'.format(res[0][0]['startTime'][5:-3],res[0][0]['endTime'][5:-3]),
-                            text = '天氣狀況 {}\n溫度 {} ~ {} °C\n降雨機率 {}\舒適度 {}'.format(data[0]['parameter']['parameterName'],data[2]['parameter']['parameterName'],data[4]['parameter']['parameterName'],data[1]['parameter']['parameterName'],data[3]['parameter']['parameterName']),
+                            text = '天氣狀況 {}\n溫度 {} ~ {} °C\n降雨機率 {}\n舒適度 {}'.format(data[0]['parameter']['parameterName'],data[2]['parameter']['parameterName'],data[4]['parameter']['parameterName'],data[1]['parameter']['parameterName'],data[3]['parameter']['parameterName']),
                             actions = [
                                 URIAction(
                                     label = '詳細內容',
@@ -59,11 +59,11 @@ def handle_message(event):
 
 def get_data(city):
     token = 'CWB-94A3AFE2-9E64-45D5-8256-4B48DEDEFB0C'
-    url = 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=' + token + '&format=JSON&locationName=' + str(city) + '&sort=time'
+    url = 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=' + token + '&format=JSON&locationName=' + str(city)
     Data = requests.get(url)
     Data = (json.loads(Data.text))['records']['location'][0]['weatherElement']
-    res = [[] , [] , []]
-    for j in range(3):
+    res = [[] , [] , [], []]
+    for j in range(4):
         for i in Data:
             res[j].append(i['time'][j])
     return res
