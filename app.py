@@ -65,7 +65,7 @@ def get_data(city):
     res = [[] , [] , []]
     for j in range(3):
         for i in Data:
-            res[j].append(j['time'][i])
+            res[j].append(i['time'][j])
     return res
 
 if __name__ == "__main__":
