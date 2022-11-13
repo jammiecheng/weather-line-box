@@ -61,7 +61,7 @@ def get_data(city):
     token = 'CWB-94A3AFE2-9E64-45D5-8256-4B48DEDEFB0C'
     url = 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=' + token + '&format=JSON&locationName=' + str(city) + '&sort=time'
     Data = requests.get(url)
-    Data = (json.loads(Data.text, encoding='UTF-8'))['records']['location'][0]['weatherElement']
+    Data = (json.loads(Data.text))['records']['location'][0]['weatherElement']
     res = [[] , [] , []]
     for j in range(3):
         for i in Data:
