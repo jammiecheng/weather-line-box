@@ -25,21 +25,18 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message_type = event.message.type
-    user_id = event.source.user_id
-    reply_token = event.reply_token
     message = event.message.text
-    if(('天氣' in message or '氣候' in message) and ('市' in message or '縣' in message)):
-        if('市' in message):
-            city = message[message.index('市') - 2 : message.index('市') + 1]
-        elif('縣' in message):
-            city = message[message.index('縣') - 2 : message.index('縣') + 1]
+    if(('天氣' in  event.message.text or '氣候' in  event.message.text) and ('市' in  event.message.text or '縣' in  event.message.text)):
+        if('市' in event.message.text):
+            city = event.message.text[event.message.text.index('市') - 2 : event.message.text.index('市') + 1]
+        elif('縣' in event.message.text):
+            city = event.message.text[event.message.text.index('縣') - 2 : event.message.text.index('縣') + 1]
         city = city.replace('台','臺')
         if(not (city in cities)):
-            line_bot_api.reply_message(reply_token,TextSendMessage(text="請輸入天氣及查詢的縣市 Ex:天氣 台北市"))
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請輸入天氣及查詢的縣市 Ex:天氣 台北市"))
         else:
             res = get_data(city)
-            line_bot_api.reply_message(reply_token, TemplateSendMessage(
+            line_bot_api.reply_message(event.reply_token, TemplateSendMessage(
                 alt_text = city + '未來 36 小時天氣預測',
                 template = CarouselTemplate(
                     columns = [
@@ -58,7 +55,7 @@ def handle_message(event):
                 )
             ))
     else:
-        line_bot_api.reply_message(reply_token,TextSendMessage(text="請輸入天氣及查詢的縣市 Ex:天氣 台北市"))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請輸入天氣及查詢的縣市 Ex:天氣 台北市"))
 
 def get_data(city):
     token = 'CWB-94A3AFE2-9E64-45D5-8256-4B48DEDEFB0C'
