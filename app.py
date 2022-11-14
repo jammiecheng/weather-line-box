@@ -29,8 +29,11 @@ def handle_message(event):
     user_id = event.source.user_id
     reply_token = event.reply_token
     message = event.message.text
-    if(('天氣' in message or '氣候' in message) and '市' in message):
-        city = message[message.index('市') - 2 : message.index('市') + 1]
+    if(('天氣' in message or '氣候' in message) and ('市' in message or '縣' in message)):
+        if('市' in message):
+            city = message[message.index('市') - 2 : message.index('市') + 1]
+        elif('縣' in message):
+            city = message[message.index('縣') - 2 : message.index('縣') + 1]
         city = city.replace('台','臺')
         if(not (city in cities)):
             line_bot_api.reply_message(reply_token,TextSendMessage(text="請輸入天氣及查詢的縣市 Ex:天氣 台北市"))
