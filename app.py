@@ -29,6 +29,7 @@ def handle_message(event):
     user_id = event.source.user_id
     reply_token = event.reply_token
     message = event.message.text
+    print(message.index("天氣"))
     if(message[:2] == '天氣'):
         city = message[3:]
         city = city.replace('台','臺')
