@@ -31,7 +31,7 @@ def handle_message(event):
     message = event.message.text
     print(message.index("天氣"))
     if('天氣' in message or '氣候' in message):
-        city = message[message.index('市') - 2 : message.index('市')]
+        city = message[message.index('市') - 2 : message.index('市') + 1]
         print(city)
         city = city.replace('台','臺')
         if(not (city in cities)):
