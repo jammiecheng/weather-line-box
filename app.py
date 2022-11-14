@@ -33,7 +33,7 @@ def handle_message(event):
         city = message[message.index('市') - 2 : message.index('市') + 1]
         city = city.replace('台','臺')
         if(not (city in cities)):
-            line_bot_api.reply_message(reply_token,TextSendMessage(text="請輸入查詢的天氣及縣市"))
+            line_bot_api.reply_message(reply_token,TextSendMessage(text="請輸入天氣及查詢的縣市"))
         else:
             res = get_data(city)
             line_bot_api.reply_message(reply_token, TemplateSendMessage(
@@ -55,7 +55,7 @@ def handle_message(event):
                 )
             ))
     else:
-        line_bot_api.reply_message(reply_token,TextSendMessage(text="請輸入查詢的天氣及縣市"))
+        line_bot_api.reply_message(reply_token,TextSendMessage(text="請輸入天氣及查詢的縣市"))
 
 def get_data(city):
     token = 'CWB-94A3AFE2-9E64-45D5-8256-4B48DEDEFB0C'
