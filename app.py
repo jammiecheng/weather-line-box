@@ -31,8 +31,8 @@ def handle_message(event):
     message = event.message.text
     print(message.index("天氣"))
     if('天氣' in message or '氣候' in message):
-        print(message.index('市'))
         city = message[message.index('市') - 2 : message.index('市')]
+        print(city)
         city = city.replace('台','臺')
         if(not (city in cities)):
             line_bot_api.reply_message(reply_token,TextSendMessage(text="查詢格式為：天氣 縣市"))
