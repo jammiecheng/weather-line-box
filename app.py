@@ -42,7 +42,7 @@ def handle_message(event):
                     columns = [
                         CarouselColumn(
                             thumbnail_image_url = 'https://i.imgur.com/Ex3Opfo.png',
-                            title = '{} ~ {}'.format(res[0][0]['startTime'][5:-3],res[0][0]['endTime'][5:-3]),
+                            title = '{} ~ {}'.format(data[0]['time']['startTime'][5:-3],data[0]['time']['endTime'][5:-3]),
                             text = '天氣狀況 {}\n溫度 {} ~ {} °C\n降雨機率 {}\n舒適度 {}'.format(data[0]['parameter']['parameterName'],data[2]['parameter']['parameterName'],data[4]['parameter']['parameterName'],data[1]['parameter']['parameterName'],data[3]['parameter']['parameterName']),
                             actions = [
                                 URIAction(
@@ -67,7 +67,7 @@ def get_data(city):
         for i in Data:
             res[j].append(i['time'][j])
     print(res[0])
-    print(Data[0])
+    print(Data[2])
     return res
 
 if __name__ == "__main__":
